@@ -27,18 +27,19 @@ pip install -r requirements.txt
 ```
 
 5. Deactivate virtual environment
-$deactivate
-
+```
+deactivate
+```
 
 # Usage
 ```
 python3 plagiarism_check.py [OPTIONS]
 ```
 ### Options:
-* -s, --src PATH   Source directory of submissions.
-* -n, --name TEXT  The name of file to check.
-* -d, --save PATH  Target directory for saving reports.
-* -k, --key TEXT   User Key for MOSS system.
+* -s, --src type:PATH   Source directory of submissions. Default: 'submissions/'.
+* -n, --name type:TEXT  The name of file to check. *required
+* -d, --save type:PATH  Target directory for saving reports. *required
+* -k, --key type:TEXT   User Key for MOSS system. *required
 * --help           Show this message and exit.
 
 # Referrences
