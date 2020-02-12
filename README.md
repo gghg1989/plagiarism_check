@@ -1,11 +1,11 @@
 # plagiarism_check
 A plagiarism check tool, which is a wrapper of mosspy basing on Stanford MOSS system.
 
-# Requirement
+## Requirement
 
 python3.7 or higher version is required.
 
-# Setup Environment
+## Setup Environment
 1. Install virtual environment
 ```
 pip install virtualenv
@@ -31,7 +31,7 @@ pip install -r requirements.txt
 deactivate
 ```
 
-# Usage
+## Usage
 ```
 python3 plagiarism_check.py [OPTIONS]
 ```
@@ -42,6 +42,6 @@ python3 plagiarism_check.py [OPTIONS]
 * -k, --key type:TEXT   User Key for MOSS system. *required
 * --help           Show this message and exit.
 
-# Referrences
+## Referrences
 * [Stanford MOSS System](http://moss.stanford.edu/)
 * [mosspy](https://github.com/soachishti/moss.py)
