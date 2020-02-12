@@ -1,5 +1,6 @@
 import mosspy
 import click
+import os
 from os import path
 
 def check_plagiarism(file_name, s, d, k):
@@ -19,12 +20,12 @@ def check_plagiarism(file_name, s, d, k):
     m.addBaseFile(submissions_path+file_name)
 
     students_dir = os.listdir(submissions_path)
-    for d in students_dir:
+    for sd in students_dir:
         # if limit >= 10:
         #     break
-        if path.exists(submissions_path+d+'/'+file_name):
-            print('uploading...' + d)
-            m.addFile(submissions_path+d+'/'+file_name)
+        if path.exists(submissions_path+sd+'/'+file_name):
+            print('uploading...' + sd)
+            m.addFile(submissions_path+sd+'/'+file_name)
             limit += 1
     print(str(limit)+' files uploaded.')
     print("Waiting plagiarism checking results from MOSS server...")
@@ -45,7 +46,7 @@ def check_plagiarism(file_name, s, d, k):
         print('Report is downloaded to ' + output_path + '.')
 
 @click.command()
-@click.option('--src', '-s', 's', help='Source directory of submissions.', default='submissions/', type=click.Path(exists=True))
+@click.option('--src', '-s', 's', help='Source directory of submissions. Need to end with /', default='submissions/', type=click.Path(exists=True))
 @click.option('--name', '-n', 'n', help='The name of file to check.', type=click.STRING)
 @click.option('--save', '-d', 'd', help='Target directory for saving reports.', type=click.Path())
 @click.option('--key', '-k', 'k', help='User Key for MOSS system.', default=None, type=click.STRING)
