@@ -1,15 +1,17 @@
 import mosspy
-
 import click
+from os import path
 
-def check_plagiarism(file_name):
-    counter = 0      
-
+def check_plagiarism(file_name, s, d, k):
     limit = 0
 
-    userid = 1
+    if k == None:
+        print('UserID for MOSS is INVALID! Task is aborted.')
+        exit()
+    else:
+        userid = k
 
-    submissions_path = 'submissions/hw5/'
+    submissions_path = s
 
     m = mosspy.Moss(userid, "python")
     m.options['n'] = 900
@@ -20,10 +22,9 @@ def check_plagiarism(file_name):
     for d in students_dir:
         # if limit >= 10:
         #     break
-        # print('uploading...' + d+'/'+file_name)
-        if path.exists(submissions_path+d+'/hw5/'+file_name):
+        if path.exists(submissions_path+d+'/'+file_name):
             print('uploading...' + d)
-            m.addFile(submissions_path+d+'/hw5/'+file_name)
+            m.addFile(submissions_path+d+'/'+file_name)
             limit += 1
     print(str(limit)+' files uploaded.')
     print("Waiting plagiarism checking results from MOSS server...")
@@ -32,18 +33,26 @@ def check_plagiarism(file_name):
     print ("Report Url: " + url)
 
     # Save report file
-    output_path = 'output/hw5/'
-    if not os.path.isdir(output_path):
-        os.mkdir(output_path)
-    m.saveWebPage(url, output_path + "report.html")
-
-    # Download whole report locally including code diff links
-    mosspy.download_report(url, output_path, connections=8)
+    if d != None:
+        print('Start downloading plagiarism check reports...')
+        output_path = d
+        if not os.path.isdir(output_path):
+            os.mkdir(output_path)
+        
+        m.saveWebPage(url, output_path + "report.html")
+        # Download whole report locally including code diff links
+        mosspy.download_report(url, output_path, connections=8)
+        print('Report is downloaded to ' + output_path + '.')
 
 @click.command()
-@click.option('-s', '--src', '--source', help='Source directory of submissions', type=click.Path(exists=True))
-def main(source):
-    print('test' + str(source))
+@click.option('--src', '-s', 's', help='Source directory of submissions', default='submissions/', type=click.Path(exists=True))
+@click.option('--name', '-n', 'n', help='The name of file to check', type=click.STRING)
+@click.option('--save', '-d', 'd', help='Target directory for saving reports', type=click.Path())
+@click.option('--key', '-k', 'k', help='User Key for MOSS system', default=None, type=click.STRING)
+
+def main(n, s, d, k):
+    print('Start checking plagiarism for ' + n + '...')
+    check_plagiarism(n, s, d, k)
 
 if __name__ == "__main__":
     main()
