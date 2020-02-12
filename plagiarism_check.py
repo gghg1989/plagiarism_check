@@ -45,10 +45,10 @@ def check_plagiarism(file_name, s, d, k):
         print('Report is downloaded to ' + output_path + '.')
 
 @click.command()
-@click.option('--src', '-s', 's', help='Source directory of submissions', default='submissions/', type=click.Path(exists=True))
-@click.option('--name', '-n', 'n', help='The name of file to check', type=click.STRING)
-@click.option('--save', '-d', 'd', help='Target directory for saving reports', type=click.Path())
-@click.option('--key', '-k', 'k', help='User Key for MOSS system', default=None, type=click.STRING)
+@click.option('--src', '-s', 's', help='Source directory of submissions.', default='submissions/', type=click.Path(exists=True))
+@click.option('--name', '-n', 'n', help='The name of file to check.', type=click.STRING)
+@click.option('--save', '-d', 'd', help='Target directory for saving reports.', type=click.Path())
+@click.option('--key', '-k', 'k', help='User Key for MOSS system.', default=None, type=click.STRING)
 
 def main(n, s, d, k):
     print('Start checking plagiarism for ' + n + '...')
