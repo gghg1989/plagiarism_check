@@ -2,4 +2,4 @@ beautifulsoup4==4.8.2
 Click==7.0
 lxml==4.6.5
 mosspy==1.0.8
-soupsieve==1.9.5
+soupsieve==2.8.4
